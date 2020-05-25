@@ -2,12 +2,16 @@ README.md
 # Administrator app
 
 MySQL 8 o superior
+
 Maven
+
 Java 8 o superior
 
 ## Installation
 
 ```
+git clone https://github.com/claudio252/administrator.git
+cd administrator
 ./mvnw clean package
 ```
 
