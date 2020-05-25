@@ -1,0 +1,17 @@
+<form class="hospital-form" [formGroup]="hospitalForm" (ngSubmit)="submitHospital()">
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Nombre" formControlName="name"/>
+        <mat-error *ngIf="hospitalForm.controls.name.errors">
+            Nombre es <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Direccion" formControlName="address" [errorStateMatcher]="matcher"/>
+        <mat-error *ngIf="hospitalForm.controls.address.errors">
+            Direccion es <strong>requirido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <button type="submit" mat-button color="primary" [disabled]="!hospitalForm.valid">Guardar</button>
+</form>

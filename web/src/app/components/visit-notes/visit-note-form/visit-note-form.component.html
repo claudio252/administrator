@@ -1,0 +1,34 @@
+<form class="visit-note-form" [formGroup]="visitNoteForm" (ngSubmit)="submitVisitNote()">
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Descripcion" formControlName="description"/>
+        <mat-error *ngIf="visitNoteForm.controls.description.errors">
+            Nombre es <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput [matDatepicker]="dp" placeholder="Fecha de visita" formControlName="visitDate">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <mat-label>Doctors</mat-label>
+        <mat-select formControlName="doctor">
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor._links.doctor">
+                {{ doctor.name }} {{ doctor.lastName }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <mat-label>Patients</mat-label>
+        <mat-select formControlName="patient">
+            <mat-option *ngFor="let patient of patients" [value]="patient._links.patient">
+                {{ patient.name }} {{ patient.lastName }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button type="submit" mat-button color="primary" [disabled]="!visitNoteForm.valid">Guardar</button>
+</form>

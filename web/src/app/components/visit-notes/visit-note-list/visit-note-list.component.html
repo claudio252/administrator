@@ -1,0 +1,22 @@
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-evenly center">
+    <mat-card class="example-card" *ngFor="let visitNote of visitNotes" fxFlex="30">
+        <mat-card-header>
+            <div mat-card-avatar><i class="material-icons">folder_open</i></div>
+            <mat-card-title>Nota de Visita</mat-card-title>
+            <mat-card-subtitle>{{ visitNote.visitDate }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{ visitNote.description }}
+            </p>
+            <h4>Doctor: {{ visitNote.doctor?.name }} {{ visitNote.doctor?.lastName }}</h4>
+            <h4>Paciente: {{ visitNote.patient?.name }} {{ visitNote.patient?.lastName }}</h4>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button mat-button color="primary" [routerLink]="['editar']" [state]="{ href: visitNote._links.visitNote.href }">Editar</a>
+            <button mat-button mat-button color="warn" (click)="deleteVisitNote(visitNote._links.visitNote.href)">Eliminar</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <button class="fab-add" mat-fab color="warn" [routerLink]="['/notas-visita/crear']">Crear</button>
+</div>

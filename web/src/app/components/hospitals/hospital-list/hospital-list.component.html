@@ -1,0 +1,106 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let hospital of hospitals">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Nombre de la Institucion
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ hospital.name }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Direccion</mat-card-title>
+                <mat-card-subtitle>{{ hospital.address }}</mat-card-subtitle>
+            </mat-card-header>
+            <img
+                mat-card-image
+                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu"
+            />
+            <mat-card-content>
+                <table
+                    mat-table
+                    [dataSource]="hospital.dataSource"
+                    class="mat-elevation-z8"
+                >
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef>No.</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.position }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.name }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef>LastName</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.lastName }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef>Address</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.address }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="birthDate">
+                        <th mat-header-cell *matHeaderCellDef>BirthDate</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.birthDate }}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+        <mat-action-row>
+            <a
+                [routerLink]="['/hospitales/agregarDoctor']"
+                [state]="{ href: hospital._links.hospital.href }"
+                mat-button
+                color="primary"
+                >Agregar doctores</a
+            >
+            <a
+                [routerLink]="['/hospitales/editar']"
+                [state]="{ href: hospital._links.hospital.href }"
+                mat-button
+                color="primary"
+                >Editar</a
+            >
+            <button
+                mat-button
+                color="warn"
+                (click)="deleteHospital(hospital._links.hospital.href)"
+            >
+                Eliminar
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<button
+    class="fab-add"
+    mat-fab
+    color="warn"
+    [routerLink]="['/hospitales/crear']"
+>
+    Crear
+</button>

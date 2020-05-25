@@ -1,0 +1,30 @@
+<form class="doctor-form" [formGroup]="doctorForm" (ngSubmit)="submitDoctor()">
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Nombre" formControlName="name"/>
+        <mat-error *ngIf="doctorForm.controls.name.errors">
+            Nombre es <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Apellido" formControlName="lastName" [errorStateMatcher]="matcher"/>
+        <mat-error *ngIf="doctorForm.controls.lastName.errors">
+            Apellido es <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Direccion" formControlName="address" [errorStateMatcher]="matcher"/>
+        <mat-error *ngIf="doctorForm.controls.address.errors">
+            Direccion es <strong>requirido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput [matDatepicker]="dp" placeholder="Fecha de nacimiento" formControlName="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+
+    <button type="submit" mat-button color="primary" [disabled]="!doctorForm.valid">Guardar</button>
+</form>

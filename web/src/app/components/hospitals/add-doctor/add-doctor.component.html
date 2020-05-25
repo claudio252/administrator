@@ -1,0 +1,7 @@
+<mat-list>
+    <mat-list-item *ngFor="let doctor of allDoctors">
+        {{ doctor.name }} {{ doctor.lastName }}
+        <button mat-raised-button color="primary" *ngIf="!alreadyAdded(doctor._links.doctor.href)"
+            (click)="addDoctor(doctor._links.hospital)">Añadir</button>
+    </mat-list-item>
+</mat-list>

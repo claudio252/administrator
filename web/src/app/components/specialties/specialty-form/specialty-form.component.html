@@ -1,0 +1,14 @@
+<form class="patient-form" [formGroup]="specialtyForm" (ngSubmit)="submitSpecialty()">
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Nombre" formControlName="name"/>
+        <mat-error *ngIf="specialtyForm.controls.name.errors">
+            Nombre es <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-width">
+        <input matInput placeholder="Descripcion" formControlName="description"/>
+    </mat-form-field>
+
+    <button type="submit" mat-button color="primary" [disabled]="!specialtyForm.valid">Guardar</button>
+</form>

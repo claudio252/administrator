@@ -1,0 +1,30 @@
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-evenly center">
+    <mat-card class="example-card" *ngFor="let patient of patients" fxFlex="30">
+        <mat-card-header>
+            <div mat-card-avatar><i class="material-icons">account_circle</i></div>
+            <mat-card-title>{{ patient.name }} {{ patient.lastName }}</mat-card-title>
+            <mat-card-subtitle>{{ patient.address }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+            mat-card-image
+            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Doctores">
+                    <h4 *ngFor="let doctor of patient.doctors">{{ doctor.name }} {{ doctor.lastName }}</h4>
+                </mat-tab>
+                <mat-tab label="Notas de Visita">
+                    <h4 *ngFor="let visitNote of patient.visitNotes">{{ visitNote.description }} en fecha {{ visitNote.visitDate }}</h4>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-button mat-button color="primary" [routerLink]="['editar']" [state]="{ href: patient._links.patient.href }">Editar</a>
+            <button mat-button mat-button color="warn" (click)="deleteDoctor(patient._links.patient.href)">Eliminar</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <button class="fab-add" mat-fab color="warn" [routerLink]="['/doctores/crear']">Crear</button>
+</div>
